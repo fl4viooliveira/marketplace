@@ -1,11 +1,14 @@
-<html>
-<head>
-    <title>Book List page</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item active" aria-current="page">Book List</li>
+{% endblock breadcrumb %}
+
+{% block content %}
     <h1>This is the book list</h1>
     {% for book in queryset %}
-        <p>{{ book }}</p>
+        <p><a href="{% url 'books:book-detail' book.slug %}">{{ book }}</a></p>
     {% endfor %}
-</body>
-</html>
+{% endblock content %}
+
+
