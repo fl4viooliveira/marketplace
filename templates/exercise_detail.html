@@ -37,8 +37,6 @@
         <div class="card-header">
             Solutions
         </div>
-        
-
             {% for solution in exercise.solution_set.all %}
             <div class="accordion" id="toggle-{{ solution.solution_number }}">
                 <div class="card">
@@ -58,7 +56,6 @@
                 </div>
             </div>
             {% endfor %}
-
     </div>
     
     </aside>
