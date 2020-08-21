@@ -36,7 +36,7 @@
         <ul class="list-group list-group-flush">
             {% for exercise in chapter.exercise_set.all %}
             <li class="list-group-item">
-            <a href="{{ exercise.get_absolute_url }}}">
+            <a href="{{ exercise.get_absolute_url }}">
                 {{ exercise.exercise_number }}. {{ exercise.title }}
             </a>
             </li>
@@ -45,7 +45,7 @@
     </div>
     
     </aside>
-</div
+</div>
 
 {% endblock content %}
 
