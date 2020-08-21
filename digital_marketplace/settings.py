@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'crispy_forms',
 
     # own apps
     'books',
@@ -139,3 +140,6 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 SITE_ID = 1
+
+# Django Crispy Forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
