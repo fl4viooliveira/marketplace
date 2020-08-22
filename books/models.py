@@ -41,11 +41,6 @@ def post_user_signup_receiver(sender, instance, created, *args, **kwargs):
 post_save.connect(post_user_signup_receiver, sender=settings.AUTH_USER_MODEL)
 
 
-
-
-
-
-
 class Author(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)

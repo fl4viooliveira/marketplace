@@ -1,11 +1,12 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load static %}
 
 {% block breadcrumb %}
 <li class="breadcrumb-item" aria-current="page">
     <a href="{% url 'books:book-list' %}">Book List</a>
 </li>
 <li class="breadcrumb-item" aria-current="page">
-    <a href="{{ exercise.chapter.book.get_absolute_url }}">
+   <a href="{{ exercise.chapter.book.get_absolute_url }}">
     {{ exercise.chapter.book.title }}
     </a>
 </li>
@@ -20,12 +21,13 @@
 {% endblock breadcrumb %}
 
 {% block content %}
+
 <div class="row">
     <main class="col-md-4">
     <div class="card" style="width: 18rem;">
         <div class="card-header">{{ exercise.chapter.book.title }}</div>
         <img src="{{ exercise.chapter.book.cover.url }}" class="card-img-top" alt="...">
-        <div class= "card-body">
+        <div class="card-body">
             <p class="card-text">Published: {{ exercise.chapter.book.publication_date }}</p>
         </div>
     </div>
@@ -37,6 +39,9 @@
         <div class="card-header">
             Solutions
         </div>
+
+            {% if exercise.chapter.book in request.user.userlibrary.book_list %}
+
             {% for solution in exercise.solution_set.all %}
             <div class="accordion" id="toggle-{{ solution.solution_number }}">
                 <div class="card">
@@ -56,11 +61,19 @@
                 </div>
             </div>
             {% endfor %}
+
+            {% else %}
+        <div class="text-center">
+            <h4>You do not have access to this book. 
+            <a href="#">Purchase this book</a> to have access to the solutions
+            </h4>
+            <img src="{% static '/images/lock.png' %}" />
+            {% endif %}
+        </div>
     </div>
     
     </aside>
-</div
+</div>
 
 
 {% endblock content %}
-

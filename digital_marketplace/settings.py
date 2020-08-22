@@ -128,8 +128,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = BASE_DIR / 'static' # is equal to os.path.join(BASE_DIR, 'static/')
-MEDIA_ROOT = BASE_DIR / 'media' # is equal to os.path.join(BASE_DIR, 'media/')
+STATICFILES_DIRS = (BASE_DIR, 'static')
+
+STATIC_ROOT = BASE_DIR / 'static_root' # is equal to os.path.join(BASE_DIR, 'static/')
+MEDIA_ROOT = BASE_DIR / 'media_root' # is equal to os.path.join(BASE_DIR, 'media/')
 
 
 # Django Allauth Settings
