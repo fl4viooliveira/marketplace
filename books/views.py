@@ -1,6 +1,7 @@
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from .models import Book, Chapter, Exercise
+from shopping_cart.models import Order, OrderItem
 
 
 def book_list(request):
@@ -11,15 +12,24 @@ def book_list(request):
     }
     return render(request, "book_list.html", context)
 
+
 def book_detail(request, slug):
     # display a list of the chapters in this book
     book = get_object_or_404(Book, slug=slug)
+    order = Order.objects.get(user=request.user)
+    order_item = OrderItem.objects.get(book=book)
+    book_is_in_cart = False
+    if order_item in order.items.all():
+        book_is_in_cart = True
     context = {
-        'book': book
+        'book': book,
+        'in_cart': book_is_in_cart
     }
     return render(request, "book_detail.html", context)
 
+
 def chapter_detail(request, book_slug, chapter_number):
+    # display a list of the exercises in the chapter
     chapter_qs = Chapter.objects \
         .filter(book__slug=book_slug) \
         .filter(chapter_number=chapter_number)
