@@ -8,17 +8,17 @@ Author
     Book
         Chapter 1
             Exercise 1
-                Solution 1 
+                Solution 1
                 Solution 2
                 ...
             Exercise 2
-            ...
+            ..
         Chapter 2
-  
 '''
 
+
 class UserLibrary(models.Model):
-    books = models.ManyToManyField('Book')
+    books = models.ManyToManyField('Book', blank=True)
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
@@ -49,7 +49,7 @@ class Author(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
-    
+
 class Book(models.Model):
     authors = models.ManyToManyField(Author)
     title = models.CharField(max_length=100)
@@ -66,7 +66,7 @@ class Book(models.Model):
         return reverse("books:book-detail", kwargs={
             'slug': self.slug
         })
-    
+
 
 class Chapter(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
@@ -94,11 +94,10 @@ class Exercise(models.Model):
 
     def get_absolute_url(self):
         return reverse("books:exercise-detail", kwargs={
-        'book_slug': self.chapter.book.slug,
-        'chapter_number': self.chapter.chapter_number,
-        'exercise_number': self.exercise_number
-    })
-
+            'book_slug': self.chapter.book.slug,
+            'chapter_number': self.chapter.chapter_number,
+            'exercise_number': self.exercise_number
+        })
 
 
 class Solution(models.Model):
