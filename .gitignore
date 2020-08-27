@@ -144,4 +144,5 @@ dmypy.json
 
 .vscode/
 
-digital_marketplace/settings.py
+# digital_marketplace/settings.py
+stripe_keys.txt
